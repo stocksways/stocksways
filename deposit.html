@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Deposit INR</title>
+  <link rel="stylesheet" href="jhant.css" />
+  <style>
+    .deposit-container {
+      max-width: 600px;
+      margin: 50px auto;
+      text-align: center;
+      padding: 20px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+    }
+
+    .deposit-container h2 {
+      margin-bottom: 20px;
+    }
+
+    .amount-options button {
+      margin: 10px;
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .amount-options button:hover {
+      background-color: #388e3c;
+    }
+
+    #confirmation {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <h2>StockMarket</h2>
+      </div>
+      <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="withdraw.html">Withdraw</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="deposit-container">
+    <h2>Deposit INR</h2>
+    <p>Select an amount to deposit:</p>
+
+    <div class="amount-options">
+      
+       <a href="payment.html">₹200</a>
+       <a href="payment.html">₹300</a>
+       <a href="payment.html">₹400</a>
+       <a href="payment.html">₹500</a>
+       <a href="payment.html">₹600</a>
+       <a href="payment.html">₹800</a>
+       <a href="payment.html">₹1000</a>
+       
+    </div>
+    <div>
+      <button>FILL UTR</button>
+      <input type="UTR" id="password" placeholder="UTR" required />
+    </div>
+
+    <div id="confirmation"></div>
+  </div>
+
+  <script>
+    function deposit(amount) {
+      // You can expand this logic to update user balance if implemented
+      document.getElementById("confirmation").textContent = `₹${amount} deposited successfully!`;
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>

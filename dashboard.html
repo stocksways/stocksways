@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stock Market</title>
+  <link rel="stylesheet" href="jhant.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <h2>StockMarket</h2>
+      </div>
+      <ul class="nav-links">
+        <li><a href="deposit.html">Deposit</a></li>
+        <li><a href="withdraw.html">Withdraw</a></li>
+        
+        <li>
+          <a href="cart.html">
+            Cart <span id="cart-count" class="cart-count-badge">0</span>
+          </a>
+        </li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+
+
+        
+
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Stock List -->
+  <div class="stock-container">
+    <h2>Top Indian Stocks</h2>
+    <div class="stock-list" id="stockList"></div>
+  </div>
+
+  <!-- Cart Section -->
+  <div class="cart-container" id="cart">
+    <h2>Your Cart</h2>
+    <ul id="cartList"></ul>
+  </div>
+
+  <script>
+    const stocks = [
+      { name: "Infosys", symbol: "INFY", price: 299 },
+      { name: "Tata Motors", symbol: "TATAMOT", price: 255 },
+      { name: "HDFC Bank", symbol: "HDFCB", price: 280 },
+      { name: "ICICI Bank", symbol: "ICICI", price: 265 },
+      { name: "Wipro", symbol: "WIPRO", price: 275 },
+      { name: "TCS", symbol: "TCS", price: 300 },
+      { name: "Axis Bank", symbol: "AXIS", price: 290 },
+      { name: "Reliance", symbol: "RELI", price: 285 },
+      { name: "Maruti Suzuki", symbol: "MARUTI", price: 278 },
+      { name: "Bajaj Finance", symbol: "BAJAJ", price: 295 },
+      { name: "Adani Ports", symbol: "ADANI", price: 210 },
+      { name: "Zomato", symbol: "ZOMATO", price: 250 },
+      { name: "Bharti Airtel", symbol: "AIRTEL", price: 225 },
+      { name: "L&T", symbol: "LT", price: 260 },
+      { name: "Nestle India", symbol: "NESTLE", price: 298 },
+      { name: "HCL Tech", symbol: "HCL", price: 272 },
+      { name: "Tech Mahindra", symbol: "TECHM", price: 282 },
+      { name: "Coal India", symbol: "COAL", price: 240 },
+      { name: "IndusInd Bank", symbol: "INDUS", price: 288 },
+      { name: "Power Grid", symbol: "PWRGRD", price: 218 }
+    ];
+
+    const stockList = document.getElementById("stockList");
+    const cartList = document.getElementById("cartList");
+
+    // Render stocks
+    stocks.forEach(stock => {
+      const card = document.createElement("div");
+      card.className = "stock-card";
+      card.innerHTML = `
+        <img src="https://robohash.org/${stock.symbol}?size=80x80&set=set3" alt="${stock.symbol}" class="stock-logo" />
+        <h3>${stock.name}</h3>
+        <p><strong>Price:</strong> ₹${stock.price}</p>
+        <button class="buy-btn" onclick="buyStock('${stock.name}', ${stock.price})">Buy</button>
+      `;
+      stockList.appendChild(card);
+    });
+
+    // Add stock to cart
+    function buyStock(name, price) {
+      const item = document.createElement("li");
+      item.textContent = `${name} - ₹${price}`;
+      cartList.appendChild(item);
+    }
+    // Update cart count on page load
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  document.getElementById("cart-count").textContent = cart.length;
+}
+
+// Add stock to cart
+function buyStock(name, price) {
+  const item = { name, price };
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.push(item);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert(`${name} added to cart!`);
+  updateCartCount(); // update badge
+}
+
+updateCartCount(); // run on page load
+function logout() {
+  // Clear login/session data
+  localStorage.removeItem("loggedInUser"); // or sessionStorage.clear();
+
+  // Optional: Clear cart too if needed
+  // localStorage.removeItem("cart");
+
+  // Redirect to login page
+  window.location.href = "login.html";
+}
+
+  </script>
+</body>
+</html>
