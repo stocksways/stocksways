@@ -63,16 +63,15 @@
     <p>Select an amount to deposit:</p>
 
     <div class="amount-options">
-      
-       <a href="payment.html">₹200</a>
-       <a href="payment.html">₹300</a>
-       <a href="payment.html">₹400</a>
-       <a href="payment.html">₹500</a>
-       <a href="payment.html">₹600</a>
-       <a href="payment.html">₹800</a>
-       <a href="payment.html">₹1000</a>
-       
-    </div>
+  <button onclick="selectAmount(200)">₹200</button>
+  <button onclick="selectAmount(300)">₹300</button>
+  <button onclick="selectAmount(400)">₹400</button>
+  <button onclick="selectAmount(500)">₹500</button>
+  <button onclick="selectAmount(600)">₹600</button>
+  <button onclick="selectAmount(800)">₹800</button>
+  <button onclick="selectAmount(1000)">₹1000</button>
+</div>
+
     <div>
       <button>FILL UTR</button>
       <input type="UTR" id="password" placeholder="UTR" required />
@@ -91,6 +90,12 @@
       localStorage.removeItem("loggedInUser");
       window.location.href = "login.html";
     }
+    function selectAmount(amount) {
+  // Save selected amount in localStorage or pass it to payment.html if needed
+  localStorage.setItem("selectedAmount", amount);
+  window.location.href = "payment.html";
+}
+
   </script>
 
 </body>
